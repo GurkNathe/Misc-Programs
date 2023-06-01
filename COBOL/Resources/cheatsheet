@@ -1,0 +1,13 @@
+PIC = "picture" and is when you declare a type
+9 = single digit integer
+    Example: 
+        PIC 9 accepts any digit 0-9
+        PIC 99 or 9(2) accepts any two digit number
+S9 = sign
+    Example:
+        PIC S9 can be negative
+V9 = indicates decimals
+    Example:
+        PIC 9V9(2) accepts a single digit and then two digits after the decimal
+A = alphabetic strings
+X = alphanumeric strings
