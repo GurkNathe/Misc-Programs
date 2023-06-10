@@ -1,0 +1,1 @@
+print(type(format(5, "b")))

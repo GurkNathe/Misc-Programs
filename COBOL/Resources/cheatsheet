@@ -11,3 +11,9 @@ V9 = indicates decimals
         PIC 9V9(2) accepts a single digit and then two digits after the decimal
 A = alphabetic strings
 X = alphanumeric strings
+
+To compile a file you run:
+cobc -x -free <file name>
+
+If you want to make a module, you have to use:
+cobc -m -free <file name>

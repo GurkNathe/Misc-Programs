@@ -10,17 +10,16 @@
            03 COMP-WIN PIC 9 VALUE 0.
            03 USER-WIN PIC 9 VALUE 0.
        01 RAND.
+           03 UPPER-BOUND PIC 9 VALUE 3.
            03 RAND-VAL PIC 9.
-           03 SEED-STRING PIC X(16).
-           03 SEED-NUM PIC 9(16) VALUE ZEROS.
        PROCEDURE DIVISION.
            DISPLAY "Choose R, P, or S"
            PERFORM UNTIL 1 = 0
-      *>   ACCEPT USER INTPUT FROM TERMINAL AND CHECK FOR CORRECTNESS
+      *>       ACCEPT USER INPUT FROM TERMINAL AND CHECK FOR CORRECTNESS
                PERFORM USER-PIC
-      *>   GENERATES RANDOM COMPUTER CHOICE  
+      *>       GENERATES RANDOM COMPUTER CHOICE  
                PERFORM COMP-PICK
-      *>   CHECKS WHO WON THE ROUND AND IF SOMEONE WON THE GAME 
+      *>       CHECKS WHO WON THE ROUND AND IF SOMEONE WON THE GAME 
                PERFORM CHECK-WIN
            END-PERFORM.
            STOP RUN.
@@ -33,7 +32,8 @@
               PERFORM USER-PIC
            END-IF.
        COMP-PICK.
-           PERFORM GEN-RAND.
+      *>   CAUSING USER-WIN AND COMP-WIN TO CHANGE UNCONTROLLABLY 
+           CALL "RAND" USING UPPER-BOUND, RAND-VAL.
            IF RAND-VAL = 0
                MOVE "R" TO COMP-CHOICE
            ELSE
@@ -44,10 +44,6 @@
                END-IF
            END-IF.
            DISPLAY "Computer chose: " COMP-CHOICE.
-       GEN-RAND.
-           MOVE FUNCTION CURRENT-DATE TO SEED-STRING.
-           MOVE FUNCTION NUMVAL(SEED-STRING) TO SEED-NUM.
-           COMPUTE RAND-VAL = FUNCTION RANDOM(SEED-NUM) * 3.
        CHECK-WIN.
            IF USER-CHOICE = COMP-CHOICE
                DISPLAY "It's a tie!"
@@ -61,6 +57,7 @@
                ELSE
                    DISPLAY "You beat the computer this round!"
                    COMPUTE USER-WIN = USER-WIN + 1
+               END-IF
            END-IF.
 
            IF USER-WIN = 2

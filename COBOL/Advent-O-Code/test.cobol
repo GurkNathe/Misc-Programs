@@ -1,0 +1,18 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TESTY.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 RAND.
+           03 UPPER-BOUND PIC 9 VALUE 3.
+           03 RAND-VAL PIC 9.
+       77 DEEP PIC 9 VALUE 0.
+       77 BOOP PIC 9 VALUE 0.
+       PROCEDURE DIVISION.
+           DISPLAY DEEP.
+           DISPLAY BOOP.
+           CALL "RAND" USING UPPER-BOUND, RAND-VAL.
+           DISPLAY RAND-VAL.
+           DISPLAY DEEP.
+           DISPLAY BOOP.
+           STOP RUN.
+       END PROGRAM TESTY.
